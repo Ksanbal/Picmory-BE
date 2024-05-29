@@ -1,0 +1,14 @@
+{
+  "python.languageServer": "Default",
+  "python.analysis.indexing": true,
+  "python.analysis.autoImportCompletions": true,
+  "[python]": {
+    "editor.defaultFormatter": "eeyore.yapf"
+  },
+  "editor.formatOnSaveMode": "file",
+  "editor.formatOnSave": true,
+  "editor.formatOnType": false,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.extraPaths": ["${workspaceFolder}"],
+  "python.autoComplete.extraPaths": ["${workspaceFolder}"]
+}
