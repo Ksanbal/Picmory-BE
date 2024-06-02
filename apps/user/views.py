@@ -3,7 +3,6 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
-from rest_framework.exceptions import PermissionDenied
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from apps.user import serializers
@@ -52,3 +51,9 @@ class UserViewSet(viewsets.ViewSet):
     def me(self, request):
         serializer = serializers.UserSerializer(request.user)
         return Response(serializer.data)
+
+    # 회원탈퇴
+    @action(methods=['DELETE'], detail=False)
+    def leave(self, request):
+        request.user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
