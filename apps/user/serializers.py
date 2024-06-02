@@ -15,3 +15,10 @@ class SignupSerializer(serializers.ModelSerializer):
             'nickname',
             'meta_data',
         ]
+
+
+# 로그인
+class SigninSerialzier(serializers.Serializer):
+    provider = serializers.CharField()
+    provider_id = serializers.CharField()
+    push_token = serializers.CharField(required=False)
