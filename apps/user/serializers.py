@@ -22,3 +22,14 @@ class SigninSerialzier(serializers.Serializer):
     provider = serializers.CharField()
     provider_id = serializers.CharField()
     push_token = serializers.CharField(required=False)
+
+
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = [
+            'provider',
+            'email',
+            'nickname',
+        ]
