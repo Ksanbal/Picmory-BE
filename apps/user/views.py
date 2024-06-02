@@ -52,6 +52,14 @@ class UserViewSet(viewsets.ViewSet):
         serializer = serializers.UserSerializer(request.user)
         return Response(serializer.data)
 
+    # 로그아웃
+    @action(methods=['DELETE'], detail=False)
+    def signout(self, request):
+        request.user.push_token = None
+        request.user.save()
+
+        return Response()
+
     # 회원탈퇴
     @action(methods=['DELETE'], detail=False)
     def leave(self, request):
