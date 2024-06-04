@@ -16,3 +16,6 @@ class Memory(models.Model):
         default=None,
     )
     is_liked = models.BooleanField(default=False)
+
+    class Meta:
+        db_table = 'apps_memory'
