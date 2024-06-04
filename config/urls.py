@@ -21,6 +21,7 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
 
+from apps.memory.views import MemoryViewSet
 from apps.upload.views import UploadViewSet
 from apps.user.views import UserViewSet
 
@@ -28,6 +29,7 @@ api_router = DefaultRouter(trailing_slash=False)
 
 api_router.register('users', UserViewSet, basename="user")
 api_router.register('uploads', UploadViewSet, basename="upload")
+api_router.register('memory', MemoryViewSet, basename="memory")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
