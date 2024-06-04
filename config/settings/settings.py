@@ -18,6 +18,7 @@ import os
 env = environ.Env(
     DEBUG=(bool, False),
     SECRET_KEY=(str),
+    HOST=(str),
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -148,6 +149,10 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
+    'DEFAULT_PAGINATION_CLASS':
+    'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE':
+    20,
 }
 
 SIMPLE_JWT = {

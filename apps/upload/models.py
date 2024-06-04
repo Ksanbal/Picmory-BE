@@ -1,5 +1,4 @@
 import uuid
-from django.conf import settings
 from django.db import models
 
 from apps import memory
@@ -29,6 +28,7 @@ class Upload(models.Model):
         memory.models.Memory,
         on_delete=models.SET_NULL,
         null=True,
+        related_name='uploads',
     )
     file_type = models.CharField(
         max_length=10,

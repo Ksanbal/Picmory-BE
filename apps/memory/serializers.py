@@ -1,3 +1,4 @@
+import os
 from rest_framework import serializers
 
 from apps.memory.models import Memory
@@ -21,3 +22,31 @@ class MemoryCreateSerialzier(serializers.ModelSerializer):
             upload.memory = memory
             upload.save()
         return memory
+
+
+class MemorySerializer(serializers.ModelSerializer):
+
+    class UploadSerializer(serializers.ModelSerializer):
+
+        file = serializers.SerializerMethodField()
+
+        class Meta:
+            model = Upload
+            fields = ('file', 'file_type')
+
+        def get_file(self, obj):
+            return os.environ.get('HOST') + obj.file.url
+
+    uploads = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Memory
+        fields = ('id', 'date', 'brand', 'uploads')
+
+    def get_uploads(self, obj):
+        uploads = obj.uploads.order_by('file_type')
+        return self.UploadSerializer(
+            uploads,
+            many=True,
+            read_only=True,
+        ).data
