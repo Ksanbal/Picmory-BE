@@ -15,16 +15,4 @@ class Memory(models.Model):
         null=True,
         default=None,
     )
-
-
-# 추억 좋아요
-class MemoryLike(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(
-        'user.User',
-        on_delete=models.CASCADE,
-    )
-    memory = models.ForeignKey(
-        'Memory',
-        on_delete=models.CASCADE,
-    )
+    is_liked = models.BooleanField(default=False)

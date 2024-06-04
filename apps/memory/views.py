@@ -10,7 +10,12 @@ class MemoryViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.MemorySerializer
 
     def get_queryset(self):
-        return Memory.objects.filter(user=self.request.user).order_by('-date')
+        self.queryset = self.queryset.filter(user=self.request.user)
+
+        if self.request.query_params.get('is-liked') == 'true':
+            self.queryset = self.queryset.filter(is_liked=True)
+
+        return self.queryset
 
     def create(self, request):
         serializer = serializers.MemoryCreateSerialzier(data=request.data)

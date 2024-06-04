@@ -41,7 +41,7 @@ class MemorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Memory
-        fields = ('id', 'date', 'brand', 'uploads')
+        fields = ('id', 'date', 'brand', 'is_liked', 'uploads')
 
     def get_uploads(self, obj):
         uploads = obj.uploads.order_by('file_type')
