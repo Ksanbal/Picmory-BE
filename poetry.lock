@@ -72,6 +72,20 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-unfold"
+version = "0.27.0"
+description = "Modern Django admin theme for seamless interface development"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django_unfold-0.27.0-py3-none-any.whl", hash = "sha256:a13fed823181730a95481840cbe51e37c35aef5f1f50abb29669d8caaef60d8f"},
+    {file = "django_unfold-0.27.0.tar.gz", hash = "sha256:236f12dded7821d792f02f900d9651a81c1d7e4d943a80745f4e2f3247e040d1"},
+]
+
+[package.dependencies]
+django = ">=3.2"
+
+[[package]]
 name = "djangorestframework"
 version = "3.15.1"
 description = "Web APIs for Django, made easy."
@@ -324,4 +338,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "jaraco.test", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "3.11.9"
-content-hash = "b622bb80e953c3e3b31404c08a74bab0ab804d623574669562e66ba47ff6f568"
+content-hash = "76d5f5f0f26008c88c8f99565e32f8c12bd38c5bddce1d27d8cbbc282053d466"
