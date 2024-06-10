@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 import time
@@ -74,3 +75,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+    class Meta:
+        db_table = 'apps_user'
+        verbose_name_plural = '사용자'

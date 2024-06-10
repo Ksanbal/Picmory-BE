@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 
 
@@ -12,6 +13,7 @@ class Album(models.Model):
 
     class Meta:
         db_table = 'apps_album'
+        verbose_name_plural = '앨범'
 
 
 class AlbumMemory(models.Model):

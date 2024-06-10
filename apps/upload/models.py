@@ -35,3 +35,7 @@ class Upload(models.Model):
         choices=FILE_TYPES,
     )
     file = models.FileField(max_length=255, upload_to=upload_to)
+
+    class Meta:
+        db_table = 'apps_upload'
+        verbose_name_plural = '업로드'

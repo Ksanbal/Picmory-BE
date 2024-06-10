@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 
 
@@ -19,3 +20,4 @@ class Memory(models.Model):
 
     class Meta:
         db_table = 'apps_memory'
+        verbose_name_plural = '추억'
