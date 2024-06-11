@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  api:
+    container_name: picmory-api-blue
+    build:
+      context: .
+      dockerfile: dockerfile.api
+    env_file:
+      - .env
+    environment:
+      - DEBUG=False
+    ports:
+      - '8080:8000'
+    volumes:
+      - ./data:/usr/src/app/data
+      - ./media:/usr/src/app/media
+      - ./static:/usr/src/app/static
+
+  # crawler:
+  #   context: ./crawler
+  #   dockerfile: dockerfile.crawler
+  #   container_name: picmory-crawler-blue
+  #   expose:
+  #     - '3000'

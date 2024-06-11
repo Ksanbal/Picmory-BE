@@ -1,0 +1,16 @@
+servcie:
+  api:
+    context: .
+    dockerfile: dockerfile.api
+    container_name: picmory-api-blue
+    ports:
+      - '8081:8000'
+    volumns:
+      - ./db.sqlite3:./db.sqlite3
+
+  crawler:
+    context: ./crawler
+    dockerfile: dockerfile.crawler
+    container_name: picmory-crawler-blue
+    expose:
+      - '3000'
