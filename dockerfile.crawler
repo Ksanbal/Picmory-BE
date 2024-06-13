@@ -1,0 +1,10 @@
+FROM node:20
+
+WORKDIR /usr/src/app
+
+COPY ./crawler ./
+
+RUN yarn install
+
+# CMD ["yarn", "pm2", "start"]
+CMD ["yarn", "dev"]

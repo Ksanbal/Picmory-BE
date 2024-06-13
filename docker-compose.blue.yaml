@@ -2,7 +2,8 @@ version: '3'
 
 services:
   api:
-    container_name: picmory-api-blue
+    container_name: api-blue
+    image: picmory-api-blue
     build:
       context: .
       dockerfile: dockerfile.api
@@ -17,9 +18,11 @@ services:
       - ./media:/usr/src/app/media
       - ./static:/usr/src/app/static
 
-  # crawler:
-  #   context: ./crawler
-  #   dockerfile: dockerfile.crawler
-  #   container_name: picmory-crawler-blue
-  #   expose:
-  #     - '3000'
+  crawler:
+    container_name: crawler-blue
+    image: picmory-crawler-blue
+    build:
+      context: .
+      dockerfile: dockerfile.crawler
+    expose:
+      - 3000

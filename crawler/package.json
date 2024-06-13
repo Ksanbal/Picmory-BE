@@ -19,5 +19,8 @@
     "dotenv": "^16.4.5",
     "fastify": "^4.26.2",
     "puppeteer": "^22.7.0"
+  },
+  "devDependencies": {
+    "pm2": "^5.4.0"
   }
 }
