@@ -14,7 +14,7 @@ services:
     ports:
       - '8080:8000'
     volumes:
-      - ./data:/usr/src/app/data
+      - ./db:/usr/src/app/db
       - ./media:/usr/src/app/media
       - ./static:/usr/src/app/static
 

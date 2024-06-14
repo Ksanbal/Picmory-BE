@@ -54,3 +54,6 @@ urlpatterns += [
 
 # media 파일 서빙을 위한 설정
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# static 파일 서빙을 위한 설정
+# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
