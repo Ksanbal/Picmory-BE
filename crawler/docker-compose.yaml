@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  nginx:
+    image: nginx:latest
+    restart: unless-stopped
+    env_file:
+      - .env.nginx
+    ports:
+      - "81:81"
+    volumes:
+      - ./nginx/:/etc/nginx/conf.d
+
+  crawler:
+    build:
+      context: .
+    expose:
+      - 3000
