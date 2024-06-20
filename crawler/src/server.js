@@ -41,12 +41,16 @@ app.route({
       return reply.code(404).send({ message: "Not Found" });
     }
 
-    const result = await brand.func(url);
-
-    return {
-      brand: brand.name,
-      ...result,
-    };
+    try {
+      const result = await brand.func(url);
+      return {
+        brand: brand.name,
+        ...result,
+      };
+    } catch (error) {
+      console.log(error);
+      return reply.code(409).send({ message: "Conflict" });
+    }
   },
 });
 

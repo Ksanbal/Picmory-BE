@@ -12,6 +12,7 @@ services:
       - ./nginx/:/etc/nginx/conf.d
 
   crawler:
+    platform: linux/amd64
     build:
       context: .
     expose:
