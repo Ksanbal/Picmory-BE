@@ -7,31 +7,33 @@ const { DOMParser } = window;
 /// 브랜드명
 export const brands = {
   /// 모노맨션
-  "monomansion.net": { name: "monomansion", func: monomansion },
+  "monomansion.net": { name: "Mono mansion", func: monomansion },
   /// 포토랩+
-  "3.37.14.138": { name: "photo_lab_plus", func: null },
+  // "3.37.14.138": { name: "photo_lab_plus", func: null },
   /// 하루필름
-  "haru8.mx2.co.kr": { name: "harufilm", func: null },
+  // "haru8.mx2.co.kr": { name: "harufilm", func: null },
   /// 포토 시그니처
-  "photoqr2.kr": { name: "photo_signature", func: photoqr2 },
+  "photoqr2.kr": { name: "PHOTO SIGNATURE", func: photoqr2 },
   /// 플랜비 스튜디오
-  "15.165.73.8": { name: "plan_b_studio", func: null },
+  // "15.165.73.8": { name: "plan_b_studio", func: null },
   /// 플레이 인 더 박스
-  "playintheboxphoto.com": { name: "play_in_the_box", func: null },
+  // "playintheboxphoto.com": { name: "play_in_the_box", func: null },
   /// 시현하다
-  "frameoffical.cafe24.com": { name: "sihyunhada", func: null },
+  // "frameoffical.cafe24.com": { name: "sihyunhada", func: null },
   /// 비비드 뮤지엄
-  "vividmuseum.co.kr": { name: "vivid_museum", func: vividmuseum },
+  "vividmuseum.co.kr": { name: "VIVID MUSEUM", func: vividmuseum },
   /// 인생네컷
-  "l4c01.lifejuin.biz": { name: "life_four_cut", func: null },
+  // "l4c01.lifejuin.biz": { name: "life_four_cut", func: null },
   /// 포토그레이
-  "pgshort.aprd.io": { name: "photogray", func: photogray },
+  "pgshort.aprd.io": { name: "PHOTOGRAY", func: photogray },
   /// 셀픽스
   "photoace.co.kr": { name: "selpix", func: selpix },
   /// 포토이즘
   "qr.seobuk.kr": { name: "photoism", func: seobuk },
   /// 픽닷
   "picdot.kr": { name: "picdot", func: picdot },
+  // 폴라 스튜디오
+  "13.125.146.152": { name: "POLA STUDIO", func: polaStudio },
 };
 
 async function getBrowser() {
@@ -179,6 +181,19 @@ async function vividmuseum(url) {
   // 영상 다운로드 링크
   const videoHref = aList[1].getAttribute("href");
   const video = [videoHref];
+
+  return { photo, video };
+}
+
+/// 폴라 스튜디오
+async function polaStudio(url) {
+  const [path, id] = url.split("/g2.php?id=");
+
+  // 사진 다운로드 링크
+  const photo = [`${path}/take/${id}.jpg`];
+
+  // 영상 다운로드 링크
+  const video = [`${path}/take/${id}.mp4`];
 
   return { photo, video };
 }
