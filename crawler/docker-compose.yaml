@@ -17,3 +17,5 @@ services:
       context: .
     expose:
       - 3000
+    volumes:
+      - ./logs/:/usr/src/app/logs

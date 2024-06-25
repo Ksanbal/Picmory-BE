@@ -2,6 +2,7 @@ import Fastify from "fastify";
 import "dotenv/config";
 
 import { brands } from "./brands.js";
+import * as fs from "fs";
 
 const app = Fastify({
   logger: true,
@@ -32,6 +33,13 @@ app.route({
   },
   handler: async (request, reply) => {
     const { url } = request.query;
+
+    // Append the URL to request_logs.txt
+    fs.appendFile("logs/requests.csv", `${Date.now()},${url}\n`, (err) => {
+      if (err) {
+        console.error(err);
+      }
+    });
 
     // 호스트로 브랜드 구분 및 브랜드별 함수 호출
     const reqHost = url?.split("/")[2];
