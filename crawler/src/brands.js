@@ -1,4 +1,8 @@
 import puppeteer from "puppeteer";
+import { JSDOM } from "jsdom";
+
+const { window } = new JSDOM("");
+const { DOMParser } = window;
 
 /// 브랜드명
 export const brands = {
@@ -17,7 +21,7 @@ export const brands = {
   /// 시현하다
   "frameoffical.cafe24.com": { name: "sihyunhada", func: null },
   /// 비비드 뮤지엄
-  "vividmuseum.co.kr": { name: "vivid_museum", func: null },
+  "vividmuseum.co.kr": { name: "vivid_museum", func: vividmuseum },
   /// 인생네컷
   "l4c01.lifejuin.biz": { name: "life_four_cut", func: null },
   /// 포토그레이
@@ -29,6 +33,20 @@ export const brands = {
   /// 픽닷
   "picdot.kr": { name: "picdot", func: picdot },
 };
+
+async function getBrowser() {
+  return puppeteer.launch({
+    headless: true,
+    executablePath: "/usr/bin/google-chrome",
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-gpu",
+    ],
+    ignoreHTTPSErrors: true,
+  });
+}
 
 /// 모노맨션 다운로드 링크
 async function monomansion(url) {
@@ -146,16 +164,21 @@ async function picdot(url) {
   return { photo, video };
 }
 
-async function getBrowser() {
-  return puppeteer.launch({
-    headless: true,
-    executablePath: "/usr/bin/google-chrome",
-    args: [
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
-      "--disable-dev-shm-usage",
-      "--disable-gpu",
-    ],
-    ignoreHTTPSErrors: true,
-  });
+/// 비비드 뮤지엄
+async function vividmuseum(url) {
+  const res = await fetch(url);
+  const html = await res.text();
+  const document = new DOMParser().parseFromString(html, "text/html");
+
+  const aList = document.querySelectorAll("a");
+
+  // 사진 다운로드 링크
+  const photoHref = aList[0].getAttribute("href");
+  const photo = [photoHref];
+
+  // 영상 다운로드 링크
+  const videoHref = aList[1].getAttribute("href");
+  const video = [videoHref];
+
+  return { photo, video };
 }
