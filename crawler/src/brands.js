@@ -26,8 +26,8 @@ export const brands = {
   // "l4c01.lifejuin.biz": { name: "life_four_cut", func: null },
   /// 포토그레이
   "pgshort.aprd.io": { name: "PHOTOGRAY", func: photogray },
-  /// 셀픽스
-  "photoace.co.kr": { name: "selpix", func: selpix },
+  /// 포토에이스
+  "photoace.co.kr": { name: "PhotoAce", func: photoAce },
   /// 포토이즘
   "qr.seobuk.kr": { name: "photoism", func: seobuk },
   /// 픽닷
@@ -105,7 +105,7 @@ async function photogray(url) {
 }
 
 /// 셀픽스
-async function selpix(url) {
+async function photoAce(url) {
   const browser = await getBrowser();
   const page = await browser.newPage();
 
