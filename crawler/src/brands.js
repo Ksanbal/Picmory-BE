@@ -121,7 +121,7 @@ async function photoAce(url) {
     }, data),
   ];
 
-  const video = [photo.replace("image.jpg", "video.mp4")];
+  const video = [photo[0].replace("image.jpg", "video.mp4")];
 
   await page.close();
   await browser.close();
