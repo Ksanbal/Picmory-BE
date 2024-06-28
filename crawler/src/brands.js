@@ -11,7 +11,7 @@ export const brands = {
   /// 포토랩+
   // "3.37.14.138": { name: "photo_lab_plus", func: null },
   /// 하루필름
-  // "haru8.mx2.co.kr": { name: "harufilm", func: null },
+  "haru2.mx2.co.kr": { name: "HARUFILM", func: haruFilm },
   /// 포토 시그니처
   "photoqr2.kr": { name: "PHOTO SIGNATURE", func: photoqr2 },
   /// 플랜비 스튜디오
@@ -194,6 +194,31 @@ async function polaStudio(url) {
 
   // 영상 다운로드 링크
   const video = [`${path}/take/${id}.mp4`];
+
+  return { photo, video };
+}
+
+/// 하루필름
+async function haruFilm(url) {
+  const res = await fetch(url);
+  const html = await res.text();
+  const document = new DOMParser().parseFromString(html, "text/html");
+
+  const aList = document.querySelectorAll("a");
+
+  // 영상 다운로드 링크
+  const videoHref = "http://haru2.mx2.co.kr" + aList[0].getAttribute("href");
+  const video = [videoHref];
+
+  // 사진 다운로드 링크
+  const photoHref = "http://haru2.mx2.co.kr" + aList[1].getAttribute("href");
+  const photo = [photoHref];
+
+  // 보너스 이미지 다운로드
+  if (2 < aList.length) {
+    const bonusHref = "http://haru2.mx2.co.kr" + aList[2].getAttribute("href");
+    photo.push(bonusHref);
+  }
 
   return { photo, video };
 }
