@@ -23,7 +23,7 @@ export const brands = {
   /// 비비드 뮤지엄
   "vividmuseum.co.kr": { name: "VIVID MUSEUM", func: vividmuseum },
   /// 인생네컷
-  // "l4c01.lifejuin.biz": { name: "life_four_cut", func: null },
+  "api.life4cut.net": { name: "인생네컷", func: life4cut },
   /// 포토그레이
   "pgshort.aprd.io": { name: "PHOTOGRAY", func: photogray },
   /// 포토에이스
@@ -267,4 +267,23 @@ async function oldmoon(url) {
   const video = [videoHref];
 
   return { photo, video };
+}
+
+// 인생네컷
+async function life4cut(url) {
+  const res = await fetch(url, {
+    method: "GET",
+    redirect: "manual",
+  });
+
+  if (res.status === 301) {
+    const redirectedUrl = res.headers.get("Location");
+
+    const photo = [redirectedUrl.replace("index.html", "image.jpg")];
+    const video = [redirectedUrl.replace("index.html", "video.mp4")];
+
+    return { photo, video };
+  }
+
+  throw new Error();
 }
