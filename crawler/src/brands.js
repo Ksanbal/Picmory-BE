@@ -36,6 +36,8 @@ export const brands = {
   "13.125.146.152": { name: "POLA STUDIO", func: polaStudio },
   // 돈룩업
   "x.dontlxxkup.kr": { name: "DON'T LXXK UP", func: dontLookUp },
+  // 그믐달 셀프 스튜디오
+  "oldmoonstudio.co.kr": { name: "oldmoon", func: oldmoon },
 };
 
 async function getBrowser() {
@@ -232,6 +234,29 @@ async function dontLookUp(url) {
 
   const videoUrl = photoUrl.replace("image", "video").replace("jpg", "mp4");
   const video = [videoUrl];
+
+  return { photo, video };
+}
+
+// 그믐달 셀프 스튜디오
+async function oldmoon(url) {
+  const res = await fetch(url);
+  const html = await res.text();
+  const document = new DOMParser().parseFromString(html, "text/html");
+
+  const aList = document.querySelectorAll("a");
+
+  // 사진 다운로드 링크
+  const photoHref =
+    "https://oldmoonstudio.co.kr/api" +
+    aList[0].getAttribute("href").replace("./", "/");
+  const photo = [photoHref];
+
+  // 영상 다운로드 링크
+  const videoHref =
+    "https://oldmoonstudio.co.kr/api" +
+    aList[1].getAttribute("href").replace("./", "/");
+  const video = [videoHref];
 
   return { photo, video };
 }
