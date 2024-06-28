@@ -34,6 +34,8 @@ export const brands = {
   "picdot.kr": { name: "picdot", func: picdot },
   // 폴라 스튜디오
   "13.125.146.152": { name: "POLA STUDIO", func: polaStudio },
+  // 돈룩업
+  "x.dontlxxkup.kr": { name: "DON'T LXXK UP", func: dontLookUp },
 };
 
 async function getBrowser() {
@@ -219,6 +221,17 @@ async function haruFilm(url) {
     const bonusHref = "http://haru2.mx2.co.kr" + aList[2].getAttribute("href");
     photo.push(bonusHref);
   }
+
+  return { photo, video };
+}
+
+/// 돈룩업
+async function dontLookUp(url) {
+  const photoUrl = url.replace("/image/", "/uploads/");
+  const photo = [photoUrl];
+
+  const videoUrl = photoUrl.replace("image", "video").replace("jpg", "mp4");
+  const video = [videoUrl];
 
   return { photo, video };
 }
