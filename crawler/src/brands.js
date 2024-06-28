@@ -229,11 +229,19 @@ async function haruFilm(url) {
 
 /// 돈룩업
 async function dontLookUp(url) {
-  const photoUrl = url.replace("/image/", "/uploads/");
-  const photo = [photoUrl];
+  const res = await fetch(url);
+  const html = await res.text();
+  const document = new DOMParser().parseFromString(html, "text/html");
 
-  const videoUrl = photoUrl.replace("image", "video").replace("jpg", "mp4");
-  const video = [videoUrl];
+  const aList = document.querySelectorAll("a");
+
+  // 사진 다운로드 링크
+  const photoHref = "https://x.dontlxxkup.kr" + aList[0].getAttribute("href");
+  const photo = [photoHref];
+
+  // 영상 다운로드 링크
+  const videoHref = "https://x.dontlxxkup.kr" + aList[1].getAttribute("href");
+  const video = [videoHref];
 
   return { photo, video };
 }
