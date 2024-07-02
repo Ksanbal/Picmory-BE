@@ -40,6 +40,8 @@ export const brands = {
   "oldmoonstudio.co.kr": { name: "oldmoon", func: oldmoon },
   // selpix
   "14.63.225.67": { name: "Selpix", func: selfix },
+  // PhotoHub
+  "13.124.189.94": { name: "PhotoHub", func: photoHub },
 };
 
 async function getBrowser() {
@@ -302,8 +304,26 @@ async function selfix(url) {
 
   const path = url.split("?qr=")[1].split("&")[0];
 
-  const photo = [`http://14.63.225.67/PHOTO/SELPIX/${path}.jpg`];
-  const video = [`http://14.63.225.67/MOVIE/SELPIX/${path}.mp4`];
+  const photo = [``];
+  const video = [``];
+
+  return { photo, video };
+}
+
+// PhotoHub
+async function photoHub(url) {
+  const res = await fetch(url, {
+    method: "GET",
+  });
+
+  if (res.status !== 200) {
+    throw new Error();
+  }
+
+  const id = url.split("id=")[1];
+
+  const photo = [`http://13.124.189.94/image.php?id=${id}`];
+  const video = [`http://13.124.189.94/video.php?id=${id}`];
 
   return { photo, video };
 }
