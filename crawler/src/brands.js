@@ -38,6 +38,8 @@ export const brands = {
   "x.dontlxxkup.kr": { name: "DON'T LXXK UP", func: dontLookUp },
   // 그믐달 셀프 스튜디오
   "oldmoonstudio.co.kr": { name: "oldmoon", func: oldmoon },
+  // selpix
+  "14.63.225.67": { name: "Selpix", func: selfix },
 };
 
 async function getBrowser() {
@@ -286,4 +288,22 @@ async function life4cut(url) {
   }
 
   throw new Error();
+}
+
+// 셀픽스
+async function selfix(url) {
+  const res = await fetch(url, {
+    method: "GET",
+  });
+
+  if (res.status !== 200) {
+    throw new Error();
+  }
+
+  const path = url.split("?qr=")[1].split("&")[0];
+
+  const photo = [`http://14.63.225.67/PHOTO/SELPIX/${path}.jpg`];
+  const video = [`http://14.63.225.67/MOVIE/SELPIX/${path}.mp4`];
+
+  return { photo, video };
 }
