@@ -15,7 +15,7 @@ export const brands = {
   /// 포토 시그니처
   "photoqr2.kr": { name: "PHOTO SIGNATURE", func: photoqr2 },
   /// 플랜비 스튜디오
-  // "15.165.73.8": { name: "plan_b_studio", func: null },
+  "3.37.14.138": { name: "PLAN.B STUDIO", func: planBStudio },
   /// 플레이 인 더 박스
   // "playintheboxphoto.com": { name: "play_in_the_box", func: null },
   /// 시현하다
@@ -324,6 +324,24 @@ async function photoHub(url) {
 
   const photo = [`http://13.124.189.94/image.php?id=${id}`];
   const video = [`http://13.124.189.94/video.php?id=${id}`];
+
+  return { photo, video };
+}
+
+// 플랜비 스튜디오
+async function planBStudio(url) {
+  const res = await fetch(url, {
+    method: "GET",
+  });
+
+  if (res.status !== 200) {
+    throw new Error();
+  }
+
+  const id = url.split("id=")[1];
+
+  const photo = [`http://3.37.14.138/take/${id}.jpg`];
+  const video = [`http://3.37.14.138/take/${id}.mp4`];
 
   return { photo, video };
 }
